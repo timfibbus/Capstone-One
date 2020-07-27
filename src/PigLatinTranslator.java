@@ -12,45 +12,35 @@ public class PigLatinTranslator {
 		// if starts with consonants grab all consonants before first vowel and move to
 		// end and add ay
 		// treat y as consonant
+		// translate whole sentence
 		Scanner scan = new Scanner(System.in);
-		boolean keepOn=true;
-		while (keepOn){
 		
-		
-		System.out.println("Type yo words: ");
+		System.out.println("Enter your sentence: ");
 		String piggy = scan.nextLine();
-
+		
 		piggy = piggy.toLowerCase();
 		
 		String pigletz[] = piggy.split(" ");
-		
 		List <String> piglets1 =  new ArrayList<String>();
 		piglets1= Arrays.asList(pigletz);
-		
-		String consPig = "";
-		String vowPig = "";
-		int wordCount = 0;
 			
-			
-			for (wordCount = 0; wordCount < piglets1.size(); wordCount++) {
+			for (int wordCount = 0; wordCount < piglets1.size(); wordCount++) {
 			boolean vowelIsOne = (vowelMachine(piglets1.get(wordCount)));
+			String consPig = "";
+			String vowPig = "";
+
 			if (vowelIsOne == true) {
 				vowPig= (vowelConverter(piglets1.get(wordCount)));
-				System.out.println(vowPig + " ");
+				System.out.print(vowPig + " ");
 			} else {
 					consPig = consMachine(piglets1.get(wordCount));
+					System.out.print(consPig + "ay" + " ");
 					}
-					System.out.println(consPig + "ay" + " ");
-				}	
+					
+			}	
 			
-			System.out.println("Would you like to go again?");
-			keepOn = scan.next().contains("y");
-			
-		}
+		scan.close();
 	}
-	
-
-	
 	
 	public static String vowelConverter(String latin) {
 		String pig = "";
@@ -58,7 +48,7 @@ public class PigLatinTranslator {
 		for (i = 1; i < latin.length(); i++) {
 			pig = pig + latin.charAt(i);
 		}
-		pig = pig + latin.charAt(0) + "way";
+		pig = pig + latin.charAt(1) + "way";
 		return latin + "way";
 	}
 
@@ -104,7 +94,6 @@ public class PigLatinTranslator {
 			ch = pigCons.charAt(x);
 			pigCons = consonantFun(pigCons);
 			i = vowelMachine(pigCons);
-
 		}
 		return pigCons;
 	}
